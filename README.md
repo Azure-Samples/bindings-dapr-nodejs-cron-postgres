@@ -76,7 +76,7 @@ export POSTGRES_USER=<USERNAME>
 export POSTGRES_PASSWORD=<PASSWORD>
 ```
 
-Provision nfra and deploy application
+Provision infra and deploy application
 ```bash
 azd up
 ```
