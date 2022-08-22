@@ -96,18 +96,18 @@ Deploy to Azure for dev-test
 
 > NOTE: make sure you have Azure Dev CLI pre-reqs [here](https://github.com/Azure-Samples/todo-python-mongo-aca)
 
-Set environment variables for Postgres user and password
+1. Set environment variables for Postgres user and password
 ```bash
 export POSTGRES_USER=<USERNAME>
 export POSTGRES_PASSWORD=<PASSWORD>
 ```
 
-Provision infra and deploy application
+2. Provision infra and deploy application
 ```bash
 azd up
 ```
 
-4. Confirm the deployment is susccessful:
+3. Confirm the deployment is susccessful:
 
 Navigate to the Container App resource for the Batch service. Locate the `Log stream` and confirm the batch container is logging each insert successfully every 10s. 
 
