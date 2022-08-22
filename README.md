@@ -64,3 +64,19 @@ dapr run --app-id batch-sdk --app-port 5002 --dapr-http-port 3500 --components-p
 ```
 
 <!-- END_STEP -->
+
+### Deploy to Azure (Azure Container Apps and Azure Postgres)
+5. Deploy to Azure for dev-test
+
+NOTE: make sure you have Azure Dev CLI pre-reqs [here](https://github.com/Azure-Samples/todo-python-mongo-aca)
+
+Set environment variables for Postgres user and password
+```bash
+export POSTGRES_USER=<USERNAME>
+export POSTGRES_PASSWORD=<PASSWORD>
+```
+
+Provision nfra and deploy application
+```bash
+azd up
+```
