@@ -25,7 +25,7 @@ timeout_seconds: 6
 -->
 
 ```bash
-cd ../../db
+cd db/
 docker compose up
 ```
 
@@ -40,7 +40,7 @@ name: Install Javascript dependencies
 -->
 
 ```bash
-cd ./batch
+cd ../batch
 npm install
 ```
 
