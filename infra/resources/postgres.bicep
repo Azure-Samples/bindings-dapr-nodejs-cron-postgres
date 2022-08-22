@@ -36,3 +36,12 @@ resource postgresDB 'Microsoft.DBforPostgreSQL/servers@2017-12-01' = {
   }
 }
 
+resource postgresFirewall 'Microsoft.DBforPostgreSQL/servers/firewallRules@2017-12-01' = {
+  name: 'pg-firewall-${resourceToken}'
+  parent: postgresDB
+  properties: {
+    endIpAddress: '255.255.255.255'
+    startIpAddress: '0.0.0.0'
+  }
+}
+
