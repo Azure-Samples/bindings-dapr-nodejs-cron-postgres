@@ -26,7 +26,7 @@ timeout_seconds: 6
 
 ```bash
 cd db/
-docker compose up
+docker compose up -d
 ```
 
 <!-- END_STEP -->
@@ -62,10 +62,16 @@ timeout_seconds: 30
 -->
     
 ```bash
-dapr run --app-id batch-sdk --app-port 5002 --dapr-http-port 3500 --components-path ../../../components -- node index.js
+dapr run --app-id batch-sdk --app-port 5002 --dapr-http-port 3500 --components-path ../components -- node index.js
 ```
-
 <!-- END_STEP -->
+
+4. Stop postgres container 
+
+```bash
+cd ../db
+docker compose stop
+```
 
 # Deploy to Azure (Azure Container Apps and Azure Postgres)
 Deploy to Azure for dev-test
