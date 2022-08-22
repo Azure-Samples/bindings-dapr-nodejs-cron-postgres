@@ -51,6 +51,9 @@ resource containerAppsEnvironment 'Microsoft.App/managedEnvironments@2022-03-01'
           secretRef: 'pg-connectionstring'
         }
       ]
+      scopes: [
+        'batch'
+      ]
     }
   }
 

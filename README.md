@@ -10,6 +10,8 @@ This quickstart includes one service:
  
 - Javascript/Node.js service `bindings`
 
+# Run and develop locally
+
 ### Run and initialize PostgreSQL container
 
 1. Open a new terminal, change directories to `../../db`, and run the container with [Docker Compose](https://docs.docker.com/compose/): 
@@ -65,10 +67,10 @@ dapr run --app-id batch-sdk --app-port 5002 --dapr-http-port 3500 --components-p
 
 <!-- END_STEP -->
 
-### Deploy to Azure (Azure Container Apps and Azure Postgres)
-5. Deploy to Azure for dev-test
+# Deploy to Azure (Azure Container Apps and Azure Postgres)
+Deploy to Azure for dev-test
 
-NOTE: make sure you have Azure Dev CLI pre-reqs [here](https://github.com/Azure-Samples/todo-python-mongo-aca)
+> NOTE: make sure you have Azure Dev CLI pre-reqs [here](https://github.com/Azure-Samples/todo-python-mongo-aca)
 
 Set environment variables for Postgres user and password
 ```bash
