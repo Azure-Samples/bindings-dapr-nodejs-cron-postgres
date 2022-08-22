@@ -66,7 +66,25 @@ dapr run --app-id batch-sdk --app-port 5002 --dapr-http-port 3500 --components-p
 ```
 <!-- END_STEP -->
 
-4. Stop postgres container 
+4. Expected output:
+A batch script runs every 10 seconds using an input Cron binding. The script processes a JSON file and outputs data to a SQL database using the PostgreSQL Dapr binding:
+
+```bash
+== APP == {"sql": "insert into orders (orderid, customer, price) values (1, 'John Smith', 100.32);"}
+== APP == {"sql": "insert into orders (orderid, customer, price) values (2, 'Jane Bond', 15.4);"}
+== APP == {"sql": "insert into orders (orderid, customer, price) values (3, 'Tony James', 35.56);"}
+== APP == Finished processing batch
+== APP == {"sql": "insert into orders (orderid, customer, price) values (1, 'John Smith', 100.32);"}
+== APP == {"sql": "insert into orders (orderid, customer, price) values (2, 'Jane Bond', 15.4);"}
+== APP == {"sql": "insert into orders (orderid, customer, price) values (3, 'Tony James', 35.56);"}
+== APP == Finished processing batch
+== APP == {"sql": "insert into orders (orderid, customer, price) values (1, 'John Smith', 100.32);"}
+== APP == {"sql": "insert into orders (orderid, customer, price) values (2, 'Jane Bond', 15.4);"}
+== APP == {"sql": "insert into orders (orderid, customer, price) values (3, 'Tony James', 35.56);"}
+== APP == Finished processing batch
+```
+
+5. Stop postgres container 
 
 ```bash
 cd ../db
@@ -88,3 +106,10 @@ Provision infra and deploy application
 ```bash
 azd up
 ```
+
+4. Confirm the deployment is susccessful:
+
+Navigate to the Container App resource for the Batch service. Locate the `Log stream` and confirm the batch container is logging each insert successfully every 10s. 
+
+![](images/log_stream.png)
+
