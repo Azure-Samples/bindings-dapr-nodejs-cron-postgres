@@ -6,12 +6,6 @@ In this quickstart, you'll create a microservice to demonstrate Dapr's bindings 
 
 Visit [this](https://docs.dapr.io/developing-applications/building-blocks/bindings/) link for more information about Dapr and Bindings.
 
-> **Note:** This example leverages the Dapr SDK.  If you are looking for the example using HTTP REST only [click here](../http).
-
-This quickstart includes one service:
- 
-- Javascript/Node.js service `bindings`
-
 # Run and develop locally
 
 ### Run and initialize PostgreSQL container
