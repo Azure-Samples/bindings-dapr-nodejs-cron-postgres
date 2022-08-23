@@ -34,10 +34,6 @@ resource appInsights 'Microsoft.Insights/components@2020-02-02' existing = {
   name: 'appi-${resourceToken}'
 }
 
-resource keyVault 'Microsoft.KeyVault/vaults@2021-10-01' existing = {
-  name: 'keyvault${resourceToken}'
-}
-
 resource containerApp 'Microsoft.App/containerApps@2022-03-01' = {
   name: 'ca-${containerName}-${resourceToken}'
   location: location
@@ -90,32 +86,10 @@ resource containerApp 'Microsoft.App/containerApps@2022-03-01' = {
               name: 'APPINSIGHTS_INSTRUMENTATIONKEY'
               value: appInsights.properties.InstrumentationKey
             }
-            {
-              name: 'AZURE_KEY_VAULT_ENDPOINT'
-              value: keyVault.properties.vaultUri
-            }
           ]
         }
       ]
     }
-  }
-}
-
-resource keyVaultAccessPolicies 'Microsoft.KeyVault/vaults/accessPolicies@2021-10-01' = {
-  name: '${keyVault.name}/add'
-  properties: {
-    accessPolicies: [
-      {
-        objectId: containerApp.identity.principalId
-        permissions: {
-          secrets: [
-            'get'
-            'list'
-          ]
-        }
-        tenantId: subscription().tenantId
-      }
-    ]
   }
 }
 

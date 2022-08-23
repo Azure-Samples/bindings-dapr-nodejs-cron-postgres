@@ -96,13 +96,12 @@ Deploy to Azure for dev-test
 
 > NOTE: make sure you have Azure Dev CLI pre-reqs [here](https://github.com/Azure-Samples/todo-python-mongo-aca)
 
-1. Set environment variables for Postgres user and password
+1. Set environment variable for Postgres password:
 ```bash
-export POSTGRES_USER=<USERNAME>
-export POSTGRES_PASSWORD=<PASSWORD>
+azd env set POSTGRES_PASSWORD <PASSWORD>
 ```
 
-2. Provision infra and deploy application
+2. Provision infra and deploy application:
 ```bash
 azd up
 ```

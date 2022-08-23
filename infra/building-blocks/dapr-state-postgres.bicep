@@ -1,8 +1,8 @@
 param name string
 param location string
 
-@secure()
-param postgresUser string
+param postgresUser string = 'testdeveloper'
+
 @secure()
 param postgresPassword string
 
@@ -23,3 +23,5 @@ module daprBindingPGResources '../resources/postgres.bicep' = {
     postgresPassword: postgresPassword
   }
 }
+
+output POSTGRES_USER string = daprBindingPGResources.outputs.POSTGRES_USER

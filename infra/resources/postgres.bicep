@@ -1,8 +1,8 @@
 param name string
 param location string
 
-@secure()
-param postgresUser string
+param postgresUser string = 'testdeveloper'
+
 @secure()
 param postgresPassword string
 
@@ -45,3 +45,4 @@ resource postgresFirewall 'Microsoft.DBforPostgreSQL/servers/firewallRules@2017-
   }
 }
 
+output POSTGRES_USER string = postgresUser

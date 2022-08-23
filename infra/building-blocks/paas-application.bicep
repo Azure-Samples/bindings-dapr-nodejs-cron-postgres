@@ -7,16 +7,13 @@ param name string
 @description('Primary location for all resources')
 param location string
 
-@description('Id of the user or app to assign application roles')
-param principalId string = ''
-
 var resourceToken = toLower(uniqueString(subscription().id, name, location))
 var tags = {
   'azd-env-name': name
 }
 
-@secure()
-param postgresUser string
+param postgresUser string = 'testdeveloper'
+
 @secure()
 param postgresPassword string
 
@@ -32,17 +29,8 @@ module containerAppsEnvResources './../resources/containerappsenv.bicep' = {
 
   dependsOn: [
     logAnalyticsResources
+    appInsightsResources
   ]
-}
-
-module keyVaultResources './../resources/keyvault.bicep' = {
-  name: 'keyvault-resources'
-  params: {
-    location: location
-    tags: tags
-    resourceToken: resourceToken
-    principalId: principalId
-  }
 }
 
 module appInsightsResources './../resources/appinsights.bicep' = {
@@ -63,8 +51,6 @@ module logAnalyticsResources './../resources/loganalytics.bicep' = {
   }
 }
 
-
-output KEY_VAULT_ENDPOINT string = keyVaultResources.outputs.KEY_VAULT_ENDPOINT
 output APPINSIGHTS_INSTRUMENTATIONKEY string = appInsightsResources.outputs.APPINSIGHTS_INSTRUMENTATIONKEY
 output CONTAINER_REGISTRY_ENDPOINT string = containerAppsEnvResources.outputs.CONTAINER_REGISTRY_ENDPOINT
 output CONTAINER_REGISTRY_NAME string = containerAppsEnvResources.outputs.CONTAINER_REGISTRY_NAME

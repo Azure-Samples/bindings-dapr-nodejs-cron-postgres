@@ -5,8 +5,8 @@ targetScope = 'subscription'
 @description('Name of the the environment which is used to generate a short unqiue hash used in all resources.')
 param name string
 
-@secure()
-param postgresUser string
+param postgresLogin string = 'testdeveloper'
+
 @secure()
 param postgresPassword string
 
@@ -24,12 +24,12 @@ module application 'building-blocks/paas-application.bicep' = {
   params: {
     name: name
     location: location
-    postgresUser: postgresUser
+    postgresUser: postgresLogin
     postgresPassword: postgresPassword
   }
   scope: resourceGroup
   dependsOn:[
-    state
+    binding
   ]
 }
 
@@ -45,20 +45,20 @@ module batchContainerApp 'resources/batch.bicep' = {
   ]
 }
 
-module state 'building-blocks/dapr-state-postgres.bicep' = {
+module binding 'building-blocks/dapr-state-postgres.bicep' = {
   name: 'bindings-pg-orders'
   params: {
     name: name
     location: location
-    postgresUser: postgresUser
+    postgresUser: postgresLogin
     postgresPassword: postgresPassword
   }
   scope: resourceGroup
 }
 
-output AZURE_KEY_VAULT_ENDPOINT string = application.outputs.KEY_VAULT_ENDPOINT
 output APPINSIGHTS_INSTRUMENTATIONKEY string = application.outputs.APPINSIGHTS_INSTRUMENTATIONKEY
 output AZURE_CONTAINER_REGISTRY_ENDPOINT string = application.outputs.CONTAINER_REGISTRY_ENDPOINT
 output AZURE_CONTAINER_REGISTRY_NAME string = application.outputs.CONTAINER_REGISTRY_NAME
 output APP_CHECKOUT_BASE_URL string = batchContainerApp.outputs.CONTAINERAPP_URI
 output APP_APPINSIGHTS_INSTRUMENTATIONKEY string = application.outputs.APPINSIGHTS_INSTRUMENTATIONKEY
+output POSTGRES_USER string = binding.outputs.POSTGRES_USER
