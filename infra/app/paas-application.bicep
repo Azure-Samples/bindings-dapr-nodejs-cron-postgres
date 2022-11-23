@@ -17,7 +17,7 @@ param postgresUser string = 'testdeveloper'
 @secure()
 param postgresPassword string
 
-module containerAppsEnvResources './../resources/containerappsenv.bicep' = {
+module containerAppsEnvResources './../core/containerappsenv.bicep' = {
   name: 'containerapps-resources'
   params: {
     location: location
@@ -33,7 +33,7 @@ module containerAppsEnvResources './../resources/containerappsenv.bicep' = {
   ]
 }
 
-module appInsightsResources './../resources/appinsights.bicep' = {
+module appInsightsResources './../core/appinsights.bicep' = {
   name: 'appinsights-resources'
   params: {
     location: location
@@ -42,7 +42,7 @@ module appInsightsResources './../resources/appinsights.bicep' = {
   }
 }
 
-module logAnalyticsResources './../resources/loganalytics.bicep' = {
+module logAnalyticsResources './../core/loganalytics.bicep' = {
   name: 'loganalytics-resources'
   params: {
     location: location

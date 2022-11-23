@@ -6,18 +6,16 @@ param postgresUser string = 'testdeveloper'
 @secure()
 param postgresPassword string
 
-
-param resourceToken string = toLower(uniqueString(subscription().id, name, location))
+var resourceToken = toLower(uniqueString(subscription().id, name, location))
 param tags object = {
   'azd-env-name': name
 }
 
-module daprBindingPGResources '../resources/postgres.bicep' = {
-  name: name
+module daprBindingPGResources '../core/postgres.bicep' = {
+  name: 'dapr-binding-pg-${resourceToken}'
   params:{
     name: name
     location: location
-    resourceToken: resourceToken
     tags: tags
     postgresUser: postgresUser
     postgresPassword: postgresPassword

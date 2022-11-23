@@ -18,28 +18,27 @@ param imageName string = ''
 param ingressPort int
 
 var resourceToken = toLower(uniqueString(subscription().id, name, location))
-var tags = {
+
+param tags object = {
   'azd-env-name': name
 }
 
 resource containerAppsEnvironment 'Microsoft.App/managedEnvironments@2022-03-01' existing = {
-  name: 'cae-${resourceToken}'
+  name: 'cae${resourceToken}'
 }
 
 resource containerRegistry 'Microsoft.ContainerRegistry/registries@2022-02-01-preview' existing = {
-  name: 'contreg${resourceToken}'
+  name: 'contregistry${resourceToken}'
 }
 
 resource appInsights 'Microsoft.Insights/components@2020-02-02' existing = {
-  name: 'appi-${resourceToken}'
+  name: 'appi${resourceToken}'
 }
 
 resource containerApp 'Microsoft.App/containerApps@2022-03-01' = {
-  name: 'ca-${containerName}-${resourceToken}'
+  name: '${containerName}${resourceToken}'
   location: location
-  tags: union(tags, {
-      'azd-service-name': containerName
-    })
+  tags: tags
   identity: {
     type: 'SystemAssigned'
   }

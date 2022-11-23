@@ -3,7 +3,7 @@ param resourceToken string
 param tags object
 
 resource containerRegistry 'Microsoft.ContainerRegistry/registries@2022-02-01-preview' = {
-  name: 'contreg${resourceToken}'
+  name: 'contregistry${resourceToken}'
   location: location
   tags: tags
   sku: {

@@ -19,8 +19,10 @@ resource resourceGroup 'Microsoft.Resources/resourceGroups@2021-04-01' = {
   location: location
 }
 
-module application 'building-blocks/paas-application.bicep' = {
-  name: 'bindings-dapr-aca-paas'
+var resourceToken = toLower(uniqueString(subscription().id, name, location))
+
+module application 'app/paas-application.bicep' = {
+  name: 'bindings-dapr-aca-paas-${resourceToken}'
   params: {
     name: name
     location: location
@@ -33,8 +35,8 @@ module application 'building-blocks/paas-application.bicep' = {
   ]
 }
 
-module batchContainerApp 'resources/batch.bicep' = {
-  name: 'ca-batch'
+module batchContainerApp 'app/batch-service.bicep' = {
+  name: 'ca-batch-${resourceToken}'
   params:{
     name: name
     location: location
@@ -45,8 +47,8 @@ module batchContainerApp 'resources/batch.bicep' = {
   ]
 }
 
-module binding 'building-blocks/dapr-state-postgres.bicep' = {
-  name: 'bindings-pg-orders'
+module binding 'app/dapr-state-postgres.bicep' = {
+  name: 'bindings-pg-orders-${resourceToken}'
   params: {
     name: name
     location: location

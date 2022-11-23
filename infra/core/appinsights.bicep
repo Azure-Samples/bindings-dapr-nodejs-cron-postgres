@@ -3,7 +3,7 @@ param location string
 param tags object
 
 resource appInsights 'Microsoft.Insights/components@2020-02-02' = {
-  name: 'appi-${resourceToken}'
+  name: 'appi${resourceToken}'
   location: location
   tags: tags
   kind: 'web'
@@ -13,7 +13,7 @@ resource appInsights 'Microsoft.Insights/components@2020-02-02' = {
 }
 
 resource appInsightsDashboard 'Microsoft.Portal/dashboards@2020-09-01-preview' = {
-  name: 'appid-${resourceToken}'
+  name: 'appid${resourceToken}'
   location: location
   tags: tags
   properties: {

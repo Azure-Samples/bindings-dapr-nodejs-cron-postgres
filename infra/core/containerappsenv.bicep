@@ -8,15 +8,15 @@ param postgresUser string
 param postgresPassword string
 
 resource pg 'Microsoft.DBforPostgreSQL/servers@2017-12-01' existing = {
-  name: 'pg-${resourceToken}'
+  name: 'pg${resourceToken}'
 }
 
 resource logAnalyticsWorkspace 'Microsoft.OperationalInsights/workspaces@2021-06-01' existing = {
-  name: 'log-${resourceToken}'
+  name: 'log${resourceToken}'
 }
 
 resource containerAppsEnvironment 'Microsoft.App/managedEnvironments@2022-03-01' = {
-  name: 'cae-${resourceToken}'
+  name: 'cae${resourceToken}'
   location: location
   tags: tags
   properties: {

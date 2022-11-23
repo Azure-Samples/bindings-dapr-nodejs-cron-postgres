@@ -12,7 +12,7 @@ param tags object = {
 }
 
 resource postgresDB 'Microsoft.DBforPostgreSQL/servers@2017-12-01' = {
-  name: 'pg-${resourceToken}'
+  name: 'pg${resourceToken}'
   location: location
   tags: tags
   sku: {
@@ -37,7 +37,7 @@ resource postgresDB 'Microsoft.DBforPostgreSQL/servers@2017-12-01' = {
 }
 
 resource postgresFirewall 'Microsoft.DBforPostgreSQL/servers/firewallRules@2017-12-01' = {
-  name: 'pg-firewall-${resourceToken}'
+  name: 'pgfirewall${resourceToken}'
   parent: postgresDB
   properties: {
     endIpAddress: '255.255.255.255'

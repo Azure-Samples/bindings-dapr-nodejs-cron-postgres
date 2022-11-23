@@ -9,22 +9,29 @@ param location string
 
 @minLength(1)
 @description('name used to derive service, container and dapr appid')
-param containerName string
+param containerName string = 'batch'
 
 @description('image name used to pull')
 param imageName string = ''
 
 @description('port used for ingress target port and dapr app port')
-param ingressPort int
+param ingressPort int = 5002
 
-module containerAppHttp '../resources/containerapp-http.bicep' = {
-  name: '${name}-${containerName}'
+var resourceToken = toLower(uniqueString(subscription().id, name, location))
+
+param tags object = {
+  'azd-env-name': name
+}
+
+module containerAppHttp '../core/containerapp-http.bicep' = {
+  name: 'ca-http-${resourceToken}'
   params:{
     name: name
     location: location
     containerName: containerName
     imageName: imageName != '' ? imageName : 'nginx:latest'
     ingressPort: ingressPort
+    tags: union(tags, { 'azd-service-name': 'batch' })
   }
 }
 
