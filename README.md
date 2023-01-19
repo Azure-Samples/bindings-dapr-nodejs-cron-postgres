@@ -1,8 +1,8 @@
 # Dapr Bindings (Dapr SDK)
 
-In this quickstart, you'll create a microservice to demonstrate Dapr's bindings API to work with external systems as inputs and outputs. The service listens to input binding events from a system CRON and then outputs the contents of local data to a PostreSql output binding. 
+In this quickstart, you'll create a microservice to demonstrate Dapr's bindings API to work with external systems as inputs and outputs. The service listens to input binding events from a system cron job and then outputs the contents of local data to a PostgreSQL output binding.
 
-![](images/bindings-quickstart.png)
+![Diagram of architecture for Dapr Bindings sample](images/bindings-quickstart.png)
 
 Visit [this](https://docs.dapr.io/developing-applications/building-blocks/bindings/) link for more information about Dapr and Bindings.
 
@@ -87,24 +87,23 @@ cd ../db
 docker compose stop
 ```
 
-# Deploy to Azure (Azure Container Apps and Azure Postgres)
-Deploy to Azure for dev-test
+# Deploy to Azure (Azure Container Apps and Azure PostgreSQL)
 
-> NOTE: make sure you have Azure Dev CLI pre-reqs [here](https://github.com/Azure-Samples/todo-python-mongo-aca)
+> NOTE: make sure you have Azure Developer CLI pre-reqs [here](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)
 
-1. Set environment variable for Postgres password:
+1. Set environment variable for PostgreSQL password:
 ```bash
 azd env set POSTGRES_PASSWORD <PASSWORD>
 ```
 
-2. Provision infra and deploy application:
+2. Provision infrastructure and deploy application:
 ```bash
 azd up
 ```
 
-3. Confirm the deployment is susccessful:
+3. Confirm the deployment is successful:
 
 Navigate to the Container App resource for the Batch service. Locate the `Log stream` and confirm the batch container is logging each insert successfully every 10s. 
 
-![](images/log_stream.png)
+![Screenshot of logs with insert commands](images/log_stream.png)
 

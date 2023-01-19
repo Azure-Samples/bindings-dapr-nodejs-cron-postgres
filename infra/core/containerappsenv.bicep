@@ -7,7 +7,7 @@ param postgresUser string
 @secure()
 param postgresPassword string
 
-resource pg 'Microsoft.DBforPostgreSQL/servers@2017-12-01' existing = {
+resource pg 'Microsoft.DBforPostgreSQL/flexibleServers@2022-01-20-preview' existing = {
   name: 'pg${resourceToken}'
 }
 
@@ -41,7 +41,7 @@ resource containerAppsEnvironment 'Microsoft.App/managedEnvironments@2022-03-01'
       secrets:[
           {
             name: 'pg-connectionstring'
-            value: 'postgres://${postgresUser}@${pg.name}:${postgresPassword}@${pg.name}.postgres.database.azure.com:5432/postgres?sslmode=verify-ca'
+            value: 'postgres://${pg.properties.administratorLogin}:${postgresPassword}@${pg.properties.fullyQualifiedDomainName}:5432/postgres?sslmode=verify-ca'
           }
           
       ]

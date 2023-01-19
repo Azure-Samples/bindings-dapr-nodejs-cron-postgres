@@ -63,4 +63,3 @@ output AZURE_CONTAINER_REGISTRY_ENDPOINT string = application.outputs.CONTAINER_
 output AZURE_CONTAINER_REGISTRY_NAME string = application.outputs.CONTAINER_REGISTRY_NAME
 output APP_CHECKOUT_BASE_URL string = batchContainerApp.outputs.CONTAINERAPP_URI
 output APP_APPINSIGHTS_INSTRUMENTATIONKEY string = application.outputs.APPINSIGHTS_INSTRUMENTATIONKEY
-output POSTGRES_USER string = binding.outputs.POSTGRES_USER

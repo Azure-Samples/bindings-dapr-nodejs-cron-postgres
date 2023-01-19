@@ -11,15 +11,22 @@ param tags object = {
   'azd-env-name': name
 }
 
-module daprBindingPGResources '../core/postgres.bicep' = {
+module daprBindingPGResources '../core/flexibleserver.bicep' = {
   name: 'dapr-binding-pg-${resourceToken}'
   params:{
-    name: name
+    name: 'pg${resourceToken}'
     location: location
     tags: tags
-    postgresUser: postgresUser
-    postgresPassword: postgresPassword
+    sku: {
+      name: 'Standard_B2s'
+      tier: 'Burstable'
+    }
+    storage: {
+      storageSizeGB: 64
+    }
+    version: '11'
+    administratorLogin: postgresUser
+    administratorLoginPassword: postgresPassword
+    enableFirewall: true
   }
 }
-
-output POSTGRES_USER string = daprBindingPGResources.outputs.POSTGRES_USER
