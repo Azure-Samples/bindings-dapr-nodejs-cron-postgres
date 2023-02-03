@@ -13,6 +13,7 @@ param location string
 // "resourceGroupName": {
 //      "value": "myGroupName"
 // }
+
 param apiContainerAppName string = ''
 param apiServiceName string = 'batch'
 param applicationInsightsDashboardName string = ''
@@ -60,7 +61,7 @@ module security 'app/security.bicep' = {
 
 // Shared App Env with Dapr configuration for db
 module appEnv './app/app-env.bicep' = {
-  name: '${deployment().name}-app-env'
+  name: 'app-env'
   scope: rg
   params: {
     containerAppsEnvName: !empty(containerAppsEnvironmentName) ? containerAppsEnvironmentName : '${abbrs.appManagedEnvironments}${resourceToken}'
@@ -75,7 +76,7 @@ module appEnv './app/app-env.bicep' = {
 
 // Api backend
 module api './app/api.bicep' = {
-  name: apiServiceName
+  name: 'batch'
   scope: rg
   params: {
     name: !empty(apiContainerAppName) ? apiContainerAppName : '${abbrs.appContainerApps}${apiServiceName}-${resourceToken}'
@@ -88,14 +89,11 @@ module api './app/api.bicep' = {
     keyVaultName: security.outputs.keyVaultName
     managedIdentityName: security.outputs.managedIdentityName
   }
-  dependsOn: [
-    security
-  ]
 }
 
 // The application database
 module postgresServer './core/database/postgres/sql/postgres-sql-db.bicep' = {
-  name:'${environmentName}-${resourceToken}-pg' 
+  name:'pg' 
   scope: rg
   params: {
     name: '${resourceToken}-pg-server'

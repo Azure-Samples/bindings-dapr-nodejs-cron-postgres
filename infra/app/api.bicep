@@ -11,7 +11,7 @@ param serviceName string = 'batch'
 param managedIdentityName string = ''
 
 module app '../core/host/container-app.bicep' = {
-  name: '${serviceName}-container-app-module'
+  name: 'api'
   params: {
     name: name
     location: location
