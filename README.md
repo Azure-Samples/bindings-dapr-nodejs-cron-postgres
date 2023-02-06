@@ -97,7 +97,7 @@ Deploy to Azure for dev-test
 azd up
 ```
 
-3. Confirm the deployment is susccessful:
+2. Confirm the deployment is susccessful:
 
 Navigate to the Container App resource for the Batch service. Locate the `Log stream` and confirm the batch container is logging each insert successfully every 10s. 
 
