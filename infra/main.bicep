@@ -87,13 +87,12 @@ module api './app/api.bicep' = {
     containerAppsEnvironmentName: appEnv.outputs.environmentName
     containerRegistryName: appEnv.outputs.registryName
     serviceName: apiServiceName
-    keyVaultName: security.outputs.keyVaultName
     managedIdentityName: security.outputs.managedIdentityName
   }
 }
 
 // The application database
-module postgresServer './core/database/postgres/sql/postgres-sql-db.bicep' = {
+module postgresServer './core/database/postgresql/flexibleserver.bicep' = {
   name:'pg'
   scope: rg
   params: {
