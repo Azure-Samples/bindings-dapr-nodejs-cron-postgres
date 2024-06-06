@@ -5,7 +5,6 @@ param containerAppsEnvironmentName string
 param containerRegistryName string
 param imageName string = ''
 param name string = ''
-param keyVaultName string
 param serviceName string = 'batch'
 param managedIdentityName string = ''
 
@@ -22,16 +21,9 @@ module app '../core/host/container-app.bicep' = {
     imageName: !empty(imageName) ? imageName : 'nginx:latest'
     daprEnabled: true
     containerName: serviceName
-    keyVaultName: keyVault.name
     targetPort: 5002
-    managedIdentityEnabled: true
-    managedIdentityName: managedIdentityName
+    identityName: managedIdentityName
   }
-}
-
-
-resource keyVault 'Microsoft.KeyVault/vaults@2022-07-01' existing = {
-  name: keyVaultName
 }
 
 output SERVICE_API_IDENTITY_PRINCIPAL_ID string = app.outputs.identityPrincipalId
